@@ -247,32 +247,23 @@ int APIENTRY wWinMain(HINSTANCE hInstance,
   }
   else {
 	// If the shift key is not pressed, look for the index.html file 
-	if (!isShiftKeyDown) {
-	// Get the full pathname for the app. We look for the index.html
-	// file relative to this location.
-	wchar_t appPath[MAX_UNC_PATH];
-	wchar_t *pathRoot;
-	GetModuleFileName(NULL, appPath, MAX_UNC_PATH);
+	if (!DEVELOPMENT_MODE || !isShiftKeyDown) {
+		// Get the full pathname for the app. We look for the index.html
+		// file relative to this location.
+		wchar_t appPath[MAX_UNC_PATH];
+		wchar_t *pathRoot;
+		GetModuleFileName(NULL, appPath, MAX_UNC_PATH);
 
-	// Strip the .exe filename (and preceding "\") from the appPath
-	// and store in pathRoot
-	pathRoot = wcsrchr(appPath, '\\');
-
-	// Look for .\dev\src\index.html first
-	wcscpy(pathRoot, L"\\dev\\src\\index.html");
-
-	// If the file exists, use it
-	if (GetFileAttributes(appPath) != INVALID_FILE_ATTRIBUTES) {
-		wcscpy(szInitialUrl, appPath);
-	}
-
-	if (!wcslen(szInitialUrl)) {
+		// Strip the .exe filename (and preceding "\") from the appPath
+		// and store in pathRoot
+		pathRoot = wcsrchr(appPath, '\\');
+		
 		// Look for .\Apps\index.html next
 		wcscpy(pathRoot, L"\\Apps\\index.html");
 		if (GetFileAttributes(appPath) != INVALID_FILE_ATTRIBUTES) {
-		wcscpy(szInitialUrl, appPath);
+			wcscpy(szInitialUrl, appPath);
 		}
-	}
+	
 	}
   }
 

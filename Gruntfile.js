@@ -106,8 +106,8 @@ module.exports = function (grunt) {
                         "cwd"       : "Release/",
                         "src"       : [
                             "locales/**",
-                            "node-core/**",
-                            "Brackets.exe",
+                            //"node-core/**", //not used
+                            "Korex.exe",
                             "node.exe",
                             "cef.pak",
                             "cef_100_percent.pak",
@@ -115,7 +115,7 @@ module.exports = function (grunt) {
                             "devtools_resources.pak",
                             "icudtl.dat",
                             "libcef.dll",
-                            "command/**"
+                            //"command/**" //not used
                         ],
                         "dest"      : "installer/win/staging/"
                     }
@@ -178,7 +178,7 @@ module.exports = function (grunt) {
                     {
                         "dot"       : true,
                         "expand"    : true,
-                        "cwd"       : "<%= git.www.repo %>",
+                        "cwd"       : "<%= git.www.repo %>/dist",
                         "src"       : ["**", "!**/.git*"],
                         "dest"      : "<%= build.staging %>/Apps/"
                     }
@@ -214,7 +214,7 @@ module.exports = function (grunt) {
         },
         "git": {
             "www": {
-                "repo"      : "../kekocity",    // TODO user configurable?
+                "repo"      : "../korex",    // TODO user configurable?
                 "branch"    : grunt.option("www-branch") || ""
             },
             "shell": {

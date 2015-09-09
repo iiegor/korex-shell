@@ -178,17 +178,12 @@ int main(int argc, char* argv[]) {
     szInitialUrl = cmdLine->GetSwitchValue(cefclient::kStartupPath);
   } else {
     szInitialUrl = AppGetRunningDirectory();
-    szInitialUrl.append("/dev/src/index.html");
+    szInitialUrl.append("/Apps/index.html");
   
     if (!FileExists(szInitialUrl)) {
-      szInitialUrl = AppGetRunningDirectory();
-      szInitialUrl.append("/Apps/index.html");
-  
-      if (!FileExists(szInitialUrl)) {
-        if (GetInitialUrl() < 0)
-          return 0;
-      }
-    }
+		if (GetInitialUrl() < 0)
+			return 0;
+	}
   }
 
   // Initialize CEF.
